@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us</title>
+  
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 50px auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      padding: 0 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 40px;
+    }
+
+    .contact-info, .contact-form {
+      flex: 1;
+    }
+
+    .contact-info h2, .contact-form h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .contact-info p {
+      margin: 8px 0;
+      line-height: 1.6;
+    }
+
+    .info-block {
+      margin-bottom: 30px;
+    }
+
+    .info-block strong {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    form textarea {
+      height: 120px;
+      resize: vertical;
+    }
+
+    form button {
+      background-color: #000;
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #444;
+    }
+
+  
+</head>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<body>
+
+  <h1>Contact Us</h1>
+  <div class="container">
+    <!-- Left Side: Contact Info -->
+    <div class="contact-info">
+      <h2>Get In Touch</h2>
+      <p>Have questions about our products, your order, or anything else? We're here to help! Fill out the form and we'll get back to you as soon as possible.</p>
+      
+      <div class="info-block">
+        <strong>Our Location</strong>
+        <p>123 Urban Street, Fashion District, NY 10001, USA</p>
+      </div>
+
+      <div class="info-block">
+        <strong>Email Us</strong>
+        <p>info@urbanedge.com<br/>support@urbanedge.com</p>
+      </div>
+
+      <div class="info-block">
+        <strong>Call Us</strong>
+        <p>+1 (123) 456-7890<br/>+1 (123) 456-7891</p>
+      </div>
+
+      <div class="info-block">
+        <strong>Working Hours</strong>
+        <p>Monday - Friday: 9am - 6pm<br/>
+           Saturday: 10am - 4pm<br/>
+           Sunday: Closed</p>
+      </div>
+    </div>
+
+    <!-- Right Side: Contact Form -->
+    <div class="contact-form">
+      <h2>Send Us a Message</h2>
+      <form>
+        <label>Your Name</label>
+        <input type="text" placeholder="John Doe" />
+        <div class="error">Name must be at least 2 characters</div>
+
+        <label>Email Address</label>
+        <input type="email" placeholder="john@example.com" />
+        <div class="error">Please enter a valid email address</div>
+
+        <label>Subject</label>
+        <input type="text" placeholder="How can we help you?" />
+        <div class="error">Subject must be at least 5 characters</div>
+
+        <label>Message</label>
+        <textarea placeholder="Tell us about your inquiry..."></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

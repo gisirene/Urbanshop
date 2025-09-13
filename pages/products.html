@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urban Shop - Products</title>
+  <style>
+   * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+   
+    header {
+      background-color: rgb(221, 190, 143);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .logo h1 {
+      color: white;
+      font-size: 24px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding-bottom: 5px;
+    }
+
+   nav ul li a:hover {
+  border-bottom: 2px solid white;
+}
+
+
+    /* Search and Cart - Matching index.html */
+    .search-cart {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-box input {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .search-box button {
+      padding: 8px 15px;
+      background: chocolate;
+      color: white;
+      border: none;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+    }
+    .search-box button {
+      padding: 6px 12px;
+      border: none;
+      background-color: chocolate;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .search-box button:hover {
+      background-color: sienna;
+    }
+
+    .cart-icon {
+      position: relative;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: chocolate;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    /* Products Section */
+    .products-section {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .products-section h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .category-title {
+      font-size: 1.8em;
+      margin: 40px 0 20px;
+      color: #333;
+      border-bottom: 2px solid burlywood;
+      padding-bottom: 8px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product-info {
+      padding: 15px;
+    }
+
+    .product-name {
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #444;
+    }
+
+    .product-price {
+      color: chocolate;
+      font-weight: bold;
+      font-size: 1.1em;
+      margin-bottom: 10px;
+    }
+
+    .view-details {
+      display: block;
+      width: 100%;
+      padding: 8px;
+      background-color: burlywood;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .view-details:hover {
+      background-color: #a67b5b;
+    }
+
+    /* Modal (for product details) */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .modal-img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .close-modal {
+      float: right;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+
+    .size-options {
+      margin: 15px 0;
+    }
+
+    .size-options label {
+      display: inline-block;
+      margin-right: 10px;
+      padding: 5px 10px;
+      background: #f0f0f0;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .size-options input[type="radio"] {
+      display: none;
+    }
+
+    .size-options input[type="radio"]:checked + label {
+      background: burlywood;
+      color: white;
+    }
+
+    .add-to-cart {
+      padding: 10px 20px;
+      background-color: chocolate;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      width: 100%;
+    }
+
+    .add-to-cart:hover {
+      background-color: sienna;
+    }
+
+    .shipping-info {
+      margin: 15px 0;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-radius: 4px;
+      border-left: 3px solid burlywood;
+    }
+
+    .shipping-info h4 {
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    /* Cart Modal */
+    .cart-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cart-content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 800px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .cart-items {
+      margin: 20px 0;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .cart-item img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .cart-item-details {
+      flex: 1;
+      margin-left: 15px;
+    }
+
+    .cart-item-price {
+      font-weight: bold;
+      color: chocolate;
+    }
+
+    .remove-item {
+      color: #ff0000;
+      cursor: pointer;
+      margin-left: 15px;
+    }
+
+    .cart-total {
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: right;
+      margin-top: 20px;
+    }
+
+    .checkout-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color: chocolate;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .checkout-btn:hover {
+      background-color: sienna;
+    }
+
+    /* Shipping Form */
+    .shipping-form {
+      margin-top: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .form-group input, 
+    .form-group textarea, 
+    .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: rgb(59, 59, 59);
+      color: #f1f1f1;
+      padding: 50px 20px;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-column {
+      flex: 1 1 200px;
+    }
+
+    .footer-column h3 {
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    .footer-column a {
+      color: #ccc;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .footer-column a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #444;
+      color: #888;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .search-box {
+        margin: 10px 0 0 0;
+        width: 100%;
+      }
+      .products-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .cart-item img {
+        margin-bottom: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .footer-column a,
+.footer-column p,
+.footer-bottom {
+  color: #ffffff !important;
+}
+
+  </style>
+</head>
+
+  
+<body>
+  <header>
+    <div class="logo">
+      <img src="/assets/logo.png" alt="logo">
+      <h1>URBAN SHOP</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#service">Services</a></li>
+        <li><a href="products.html" class="active">Products</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#contact">Contact us</a></li>
+        
+      </ul>
+      
+    </nav>
+    <div class="search-cart">
+      <div class="search-box">
+        <input type="text" placeholder="Search...">
+        <button>Search</button>
+      </div>
+      <div class="cart-icon" onclick="openCartModal()">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+      </div>
+    </div>
+    <script>
+      
+ document.querySelector('.search-box button').addEventListener('click', performSearch);
+document.querySelector('.search-box input').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    performSearch();
+  }
+});
+
+function performSearch() {
+  const searchTerm = document.querySelector('.search-box input').value.toLowerCase().trim();
+  
+  if (!searchTerm) {
+    alert('Please enter a search term');
+    return;
+  }
+  
+  // Hide Necklaces and Shoes sections completely
+  document.querySelector('#Necklaces').style.display = 'none';
+  document.querySelector('#shoes').style.display = 'none';
+  
+  // Only search in Clothing section
+  const clothingProducts = document.querySelectorAll('.products-grid .product-card');
+  let foundResults = false;
+  
+  clothingProducts.forEach(card => {
+    const productName = card.querySelector('.product-name').textContent.toLowerCase();
+    
+    if (productName.includes(searchTerm)) {
+      card.style.display = 'block';
+      foundResults = true;
+      
+      // Scroll to the first found product
+      if (!document.querySelector('.search-scrolled')) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        card.classList.add('search-scrolled');
+      }
+    } else {
+      card.style.display = 'none';
+    }
+  });
+  
+  // Add a reset button if search was performed
+  if (foundResults) {
+    addResetButton();
+  } else {
+    alert('No products found matching your search');
+    resetSearch();
+  }
+}
+
+function addResetButton() {
+  // Remove existing reset button if any
+  const existingReset = document.querySelector('.reset-search');
+  if (existingReset) existingReset.remove();
+  
+  const resetBtn = document.createElement('button');
+  resetBtn.className = 'reset-search';
+  resetBtn.textContent = 'Reset Search';
+  resetBtn.style.display = 'block';
+  resetBtn.style.margin = '20px auto';
+  resetBtn.style.padding = '10px 20px';
+  resetBtn.style.backgroundColor = 'chocolate';
+  resetBtn.style.color = 'white';
+  resetBtn.style.border = 'none';
+  resetBtn.style.borderRadius = '4px';
+  resetBtn.style.cursor = 'pointer';
+  
+  resetBtn.addEventListener('click', resetSearch);
+  
+  document.querySelector('.products-section').appendChild(resetBtn);
+}
+
+function resetSearch() {
+  document.querySelector('.search-box input').value = '';
+  
+  // Show all sections again
+  document.querySelector('#Necklaces').style.display = 'block';
+  document.querySelector('#shoes').style.display = 'block';
+  
+  // Show all products in all sections
+  const allProducts = document.querySelectorAll('.product-card');
+  allProducts.forEach(card => {
+    card.style.display = 'block';
+    card.classList.remove('search-scrolled');
+  });
+  
+  const resetBtn = document.querySelector('.reset-search');
+  if (resetBtn) resetBtn.remove();
+}
+    </script>
+  </header>
+
+ 
+  <section class="service" id="service">
+    <div class="products-section">
+      <h1>Our Products</h1>
+
+      
+      <h2 class="category-title">Clothing</h2>
+      <div class="products-grid">
+        
+        <div class="product-card">
+          <img src="/assets/image 1.jpg" alt="Casual T-Shirt" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Urban Classic T-Shirt</div>
+            <div class="product-price">$29.99</div>
+            <button class="view-details" onclick="openModal('clothing1')">View Details</button>
+          </div>
+        </div>
+        
+       
+        <div class="product-card">
+          <img src="/assets/image 2.jpg" alt="Denim Jacket" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Vintage Denim Jacket</div>
+            <div class="product-price">$59.99</div>
+            <button class="view-details" onclick="openModal('clothing2')">View Details</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="/assets/m 2.jfif" alt="m 2" class="product-img">
+          <div class="product-info">
+            <div class="product-name">suit</div>
+            <div class="product-price">$59.99</div>
+            <button class="view-details" onclick="openModal('clothing11')">View Details</button>
+          </div>
+        </div>
+<div class="product-card">
+          <img src="/assets/m 4.jfif" alt="m 2" class="product-img">
+          <div class="product-info">
+            <div class="product-name">T-shirt</div>
+            <div class="product-price">$59.99</div>
+            <button class="view-details" onclick="openModal('clothing12')">View Details</button>
+          </div>
+        </div>
+        
+        <div class="product-card">
+          <img src="/assets/image 3.jpg" alt="Hoodie" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Cozy Oversized Hoodie</div>
+            <div class="product-price">$45.99</div>
+            <button class="view-details" onclick="openModal('clothing3')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 4.jpg" alt="Dress" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Summer Floral Dress</div>
+            <div class="product-price">$49.99</div>
+            <button class="view-details" onclick="openModal('clothing4')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 5.jpg" alt="Shirt" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Linen Button-Up Shirt</div>
+            <div class="product-price">$39.99</div>
+            <button class="view-details" onclick="openModal('clothing5')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 6.jpg" alt="Jeans" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Slim Fit Jeans</div>
+            <div class="product-price">$54.99</div>
+            <button class="view-details" onclick="openModal('clothing6')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 7.jpg" alt="Sweater" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Cashmere Sweater</div>
+            <div class="product-price">$79.99</div>
+            <button class="view-details" onclick="openModal('clothing7')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 8.jpg" alt="Blazer" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Tailored Blazer</div>
+            <div class="product-price">$89.99</div>
+            <button class="view-details" onclick="openModal('clothing8')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 9.jpg" alt="Shorts" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Casual Summer Shorts</div>
+            <div class="product-price">$34.99</div>
+            <button class="view-details" onclick="openModal('clothing9')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 10.jpg" alt="Jacket" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Leather Biker Jacket</div>
+            <div class="product-price">$149.99</div>
+            <button class="view-details" onclick="openModal('clothing10')">View Details</button>
+          </div>
+        </div>
+      </div>
+<section class="Necklace" id="Necklaces">
+      
+      <h2 class="category-title">Necklaces</h2>
+      <div class="products-grid">
+        
+        <div class="product-card">
+          <img src="/assets/image 11.jpg" alt="Gold Necklace" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Gold Plated Necklace</div>
+            <div class="product-price">$59.99</div>
+            <button class="view-details" onclick="openModal('necklace1')">View Details</button>
+          </div>
+        </div>
+        
+        
+        <div class="product-card">
+          <img src="/assets/image 12.jpg" alt="Silver Necklace" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Silver Pendant Necklace</div>
+            <div class="product-price">$49.99</div>
+            <button class="view-details" onclick="openModal('necklace2')">View Details</button>
+          </div>
+        </div>
+
+    
+        <div class="product-card">
+          <img src="/assets/image 13.jpg" alt="Pearl Necklace" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Pearl Strand Necklace</div>
+            <div class="product-price">$79.99</div>
+            <button class="view-details" onclick="openModal('necklace3')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 14.jpg" alt="Choker" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Velvet Choker Necklace</div>
+            <div class="product-price">$29.99</div>
+            <button class="view-details" onclick="openModal('necklace4')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 15.jpg" alt="Layered Necklace" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Layered Gold Necklace</div>
+            <div class="product-price">$69.99</div>
+            <button class="view-details" onclick="openModal('necklace5')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 16.jpg" alt="Gemstone Necklace" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Gemstone Pendant Necklace</div>
+            <div class="product-price">$89.99</div>
+            <button class="view-details" onclick="openModal('necklace6')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 17.jpg" alt="Minimalist Necklace" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Minimalist Silver Necklace</div>
+            <div class="product-price">$39.99</div>
+            <button class="view-details" onclick="openModal('necklace7')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 18.jpg" alt="Name Necklace" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Personalized Name Necklace</div>
+            <div class="product-price">$59.99</div>
+            <button class="view-details" onclick="openModal('necklace8')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 19.jpg" alt="Diamond Necklace" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Diamond Cut Pendant</div>
+            <div class="product-price">$129.99</div>
+            <button class="view-details" onclick="openModal('necklace9')">View Details</button>
+          </div>
+        </div>
+         
+    
+         
+        <div class="product-card">
+          <img src="/assets/nick 2.jfif" alt="Diamond Necklace" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Gold Cut Pendant</div>
+            <div class="product-price">$129.99</div>
+            <button class="view-details" onclick="openModal('necklace11')">View Details</button>
+          </div>
+        </div>
+ 
+        <div class="product-card">
+          <img src="/assets/nick 1.jfif" alt="Diamond Necklace" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Diamond Necklace</div>
+            <div class="product-price">$129.99</div>
+            <button class="view-details" onclick="openModal('necklace10')">View Details</button>
+          </div>
+        </div>
+      
+        <div class="product-card">
+          <img src="/assets/image 20.jpg" alt="Beaded Necklace" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Beaded Statement Necklace</div>
+            <div class="product-price">$49.99</div>
+            <button class="view-details" onclick="openModal('necklace12')">View Details</button>
+          </div>
+        </div>
+      </div>
+</section>
+<section id="shoes">
+      
+      <h2 class="category-title">Shoes</h2>
+      <div class="products-grid">
+        
+        <div class="product-card">
+          <img src="/assets/image 21.jpg" alt="Sneakers" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Urban Classic Sneakers</div>
+            <div class="product-price">$79.99</div>
+            <button class="view-details" onclick="openModal('shoes1')">View Details</button>
+          </div>
+        </div>
+        
+        
+        <div class="product-card">
+          <img src="/assets/image 22.jpg" alt="Boots" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Leather Ankle Boots</div>
+            <div class="product-price">$99.99</div>
+            <button class="view-details" onclick="openModal('shoes2')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 23.jpg" alt="Sandals" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Summer Leather Sandals</div>
+            <div class="product-price">$49.99</div>
+            <button class="view-details" onclick="openModal('shoes3')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 24.jpg" alt="Loafers" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Casual Leather Loafers</div>
+            <div class="product-price">$69.99</div>
+            <button class="view-details" onclick="openModal('shoes4')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 25.jpg" alt="High Heels" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Elegant High Heels</div>
+            <div class="product-price">$89.99</div>
+            <button class="view-details" onclick="openModal('shoes5')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 26.jpg" alt="Running Shoes" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Performance Running Shoes</div>
+            <div class="product-price">$109.99</div>
+            <button class="view-details" onclick="openModal('shoes6')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 27.jpg" alt="Slip-ons" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Canvas Slip-on Shoes</div>
+            <div class="product-price">$39.99</div>
+            <button class="view-details" onclick="openModal('shoes7')">View Details</button>
+          </div>
+        </div>
+
+<div class="product-card">
+          <img src="/assets/k 8.jfif" alt="Slip-ons" class="product-img">
+          <div class="product-info">
+            <div class="product-name">J-11</div>
+            <div class="product-price">$39.99</div>
+            <button class="view-details" onclick="openModal('shoes11')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 28.jpg" alt="Oxfords" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Classic Oxford Shoes</div>
+            <div class="product-price">$119.99</div>
+            <button class="view-details" onclick="openModal('shoes8')">View Details</button>
+          </div>
+        </div>
+
+        
+        <div class="product-card">
+          <img src="/assets/image 29.jpg" alt="Espadrilles" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Jorden outfit</div>
+            <div class="product-price">$59.99</div>
+            <button class="view-details" onclick="openModal('shoes9')">View Details</button>
+          </div>
+        </div>
+
+
+ <div class="product-card">
+          <img src="/assets/k 10.jfif" alt="Espadrilles" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Summer Espadrilles</div>
+            <div class="product-price">$59.99</div>
+            <button class="view-details" onclick="openModal('shoes12')">View Details</button>
+          </div>
+        </div>
+
+      
+        <div class="product-card">
+          <img src="/assets/image 30.jpg" alt="Hiking Boots" class="product-img">
+          <div class="product-info">
+            <div class="product-name">Outdoor Hiking Boots</div>
+            <div class="product-price">$129.99</div>
+            <button class="view-details" onclick="openModal('shoes10')">View Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <img id="modalImage" src="" alt="Product Image" class="modal-img">
+      <h2 id="modalTitle">Product Name</h2>
+      <p id="modalPrice">$0.00</p>
+      <div class="size-options" id="sizeOptions">
+        
+      </div>
+      <div class="shipping-info">
+        <h4>Shipping Information</h4>
+        <p>• Free shipping on orders over $50</p>
+        <p>• Standard delivery: 3-5 business days</p>
+        <p>• Express delivery available at checkout</p>
+        <p>• Returns accepted within 30 days</p>
+      </div>
+      <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+    </div>
+  </div>
+
+  
+  <div id="cartModal" class="cart-modal">
+    <div class="cart-content">
+      <span class="close-modal" onclick="closeCartModal()">&times;</span>
+      <h2>Your Cart</h2>
+      <div class="cart-items" id="cartItems">
+        
+      </div>
+      <div class="cart-total">
+        Total: <span id="cartTotal">$0.00</span>
+      </div>
+      <button class="checkout-btn" onclick="showShippingForm()">Proceed to Checkout</button>
+      
+      <div id="shippingForm" class="shipping-form" style="display: none;">
+        <h3>Shipping Details</h3>
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" required>
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <textarea id="address" rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" required>
+        </div>
+        <div class="form-group">
+          <label for="zipCode">Zip Code</label>
+          <input type="text" id="zipCode" required>
+        </div>
+        <div class="form-group">
+          <label for="country">Country</label>
+          <select id="country" required>
+            <option value="">Select Country</option>
+            <option value="rwanda">Rwanda</option>
+            <option value="kenya">Kenya</option>
+            <option value="uganda">Uganda</option>
+            <option value="tanzania">Tanzania</option>
+          </select>
+        </div>
+        <button class="checkout-btn" onclick="submitOrder()">Place Order</button>
+      </div>
+    </div>
+  </div>
+
+ <footer class="footer">
+  <div class="footer-container">
+    <div class="footer-column">
+      <h3>Follow Us</h3>
+      <a href="www.facebook.com" style="color: #ffffff;">Facebook</a>
+      <a href="www.twitter.com" style="color: #ffffff;">Twitter</a>
+      <a href="www.instagram.com" style="color: #ffffff;">Instagram</a>
+    </div>
+    <div class="footer-column">
+      <h3>Quick Links</h3>
+      <a href="index.html" style="color: #ffffff;">Home</a>
+      <a href="#" style="color: #ffffff;">Services</a>
+      <a href="products.html" style="color: #ffffff;">Products</a>
+      <a href="#" style="color: #ffffff;">Contact Us</a>
+    </div>
+    <div class="footer-column">
+      <h3>Contact Us</h3>
+      <p style="color: #ffffff;">
+        Makuza Plaza, Kigali<br>
+        Phone: (250) 795-817-004<br>
+        Email: urbanshop30@gmail.com
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom" style="color: #ffffff;">
+    &copy; 2025 Urban Shop. All rights reserved.
+  </div>
+</footer>
+
+
+   <script>
+  let currentProduct = null;
+  let cart = [];
+
+  const products = {
+    
+    'clothing1': {
+      id: 'clothing1',
+      name: 'Urban Classic T-Shirt',
+      price: 29.99,
+      img: '/assets/image 1.jpg',
+      hasSizes: true,
+      sizes: ['S', 'M', 'L', 'XL']
+    },
+    'clothing2': {
+      id: 'clothing2',
+      name: 'Vintage Denim Jacket',
+      price: 59.99,
+      img: '/assets/image 2.jpg',
+      hasSizes: true,
+      sizes: ['S', 'M', 'L']
+    },
+    'clothing3': {
+      id: 'clothing3',
+      name: 'Cozy Oversized Hoodie',
+      price: 45.99,
+      img: '/assets/image 3.jpg',
+      hasSizes: true,
+      sizes: ['S', 'M', 'L', 'XL']
+    },
+    'clothing4': {
+      id: 'clothing4',
+      name: 'Summer Floral Dress',
+      price: 49.99,
+      img: '/assets/image 4.jpg',
+      hasSizes: true,
+      sizes: ['S', 'M', 'L']
+    },
+    'clothing5': {
+      id: 'clothing5',
+      name: 'Linen Button-Up Shirt',
+      price: 39.99,
+      img: '/assets/image 5.jpg',
+      hasSizes: true,
+      sizes: ['S', 'M', 'L', 'XL']
+    },
+    'clothing6': {
+      id: 'clothing6',
+      name: 'Slim Fit Jeans',
+      price: 54.99,
+      img: '/assets/image 6.jpg',
+      hasSizes: true,
+      sizes: ['S', 'M', 'L', 'XL']
+    },
+    'clothing7': {
+      id: 'clothing7',
+      name: 'Cashmere Sweater',
+      price: 79.99,
+      img: '/assets/image 7.jpg',
+      hasSizes: true,
+      sizes: ['S', 'M', 'L', 'XL']
+    },
+    'clothing8': {
+      id: 'clothing8',
+      name: 'Tailored Blazer',
+      price: 89.99,
+      img: '/assets/image 8.jpg',
+      hasSizes: true,
+      sizes: ['S', 'M', 'L']
+    },
+    'clothing9': {
+      id: 'clothing9',
+      name: 'Casual Summer Shorts',
+      price: 34.99,
+      img: '/assets/image 9.jpg',
+      hasSizes: true,
+      sizes: ['S', 'M', 'L']
+    },
+    'clothing10': {
+      id: 'clothing10',
+      name: 'Leather Biker Jacket',
+      price: 149.99,
+      img: '/assets/image 10.jpg',
+      hasSizes: true,
+      sizes: ['S', 'M', 'L']
+    },
+    'clothing11': {
+      id: 'clothing11',
+      name: 'Suit',
+      price: 149.99,
+      img: '/assets/m 2.jfif',
+      hasSizes: true,
+      sizes: ['S', 'M', 'L']
+    },
+    'clothing12': {
+      id: 'clothing12',
+      name: 'T-Shirt',
+      price: 149.99,
+      img: '/assets/m 4.jfif',
+      hasSizes: true,
+      sizes: ['S', 'M', 'L']
+    },
+    'necklace1': {
+      id: 'necklace1',
+      name: 'Gold Plated Necklace',
+      price: 59.99,
+      img: '/assets/image 11.jpg',
+      hasSizes: false
+    },
+    'necklace2': {
+      id: 'necklace2',
+      name: 'Silver Pendant Necklace',
+      price: 49.99,
+      img: '/assets/image 12.jpg',
+      hasSizes: false
+    },
+    'necklace3': {
+      id: 'necklace3',
+      name: 'Pearl Strand Necklace',
+      price: 79.99,
+      img: '/assets/image 13.jpg',
+      hasSizes: false
+    },
+    'necklace4': {
+      id: 'necklace4',
+      name: 'Velvet Choker Necklace',
+      price: 29.99,
+      img: '/assets/image 14.jpg',
+      hasSizes: false
+    },
+    'necklace5': {
+      id: 'necklace5',
+      name: 'Layered Gold Necklace',
+      price: 69.99,
+      img: '/assets/image 15.jpg',
+      hasSizes: false
+    },
+    'necklace6': {
+      id: 'necklace6',
+      name: 'Gemstone Pendant Necklace',
+      price: 89.99,
+      img: '/assets/image 16.jpg',
+      hasSizes: false
+    },
+    'necklace7': {
+      id: 'necklace7',
+      name: 'Minimalist Silver Necklace',
+      price: 39.99,
+      img: '/assets/image 17.jpg',
+      hasSizes: false
+    },
+    'necklace8': {
+      id: 'necklace8',
+      name: 'Personalized Name Necklace',
+      price: 59.99,
+      img: '/assets/image 18.jpg',
+      hasSizes: false
+    },
+    'necklace9': {
+      id: 'necklace9',
+      name: 'Diamond Cut Pendant',
+      price: 129.99,
+      img: '/assets/image 19.jpg',
+      hasSizes: false
+    },
+    'necklace10': {
+      id: 'necklace10',
+      name: 'Gold Cut Pendant',
+      price: 49.99,
+      img: '/assets/nick 1.jfif',
+      hasSizes: false
+    },
+    'necklace11': {
+      id: 'necklace11',
+      name: 'Gold Necklace',
+      price: 49.99,
+      img: '/assets/nick 2.jfif',
+      hasSizes: false
+    },
+    'necklace12': {
+      id: 'necklace12',
+      name: 'Beaded Statement Necklace',
+      price: 49.99,
+      img: '/assets/image 20.jpg',
+      hasSizes: false
+    },
+
+    'shoes1': {
+      id: 'shoes1',
+      name: 'Urban Classic Sneakers',
+      price: 79.99,
+      img: '/assets/image 21.jpg',
+      hasSizes: true,
+      sizes: ['6', '7', '8', '9', '10', '11']
+    },
+    'shoes2': {
+      id: 'shoes2',
+      name: 'Leather Ankle Boots',
+      price: 99.99,
+      img: '/assets/image 22.jpg',
+      hasSizes: true,
+      sizes: ['6', '7', '8', '9', '10']
+    },
+    'shoes3': {
+      id: 'shoes3',
+      name: 'Summer Leather Sandals',
+      price: 49.99,
+      img: '/assets/image 23.jpg',
+      hasSizes: true,
+      sizes: ['5', '6', '7', '8', '9']
+    },
+    'shoes4': {
+      id: 'shoes4',
+      name: 'Casual Leather Loafers',
+      price: 69.99,
+      img: '/assets/image 24.jpg',
+      hasSizes: true,
+      sizes: ['6', '7', '8', '9', '10']
+    },
+    'shoes5': {
+      id: 'shoes5',
+      name: 'Elegant High Heels',
+      price: 89.99,
+      img: '/assets/image 25.jpg',
+      hasSizes: true,
+      sizes: ['5', '6', '7', '8', '9']
+    },
+    'shoes6': {
+      id: 'shoes6',
+      name: 'Performance Running Shoes',
+      price: 109.99,
+      img: '/assets/image 26.jpg',
+      hasSizes: true,
+      sizes: ['6', '7', '8', '9', '10', '11']
+    },
+    'shoes7': {
+      id: 'shoes7',
+      name: 'Canvas Slip-on Shoes',
+      price: 39.99,
+      img: '/assets/image 27.jpg',
+      hasSizes: true,
+      sizes: ['6', '7', '8', '9', '10']
+    },
+    'shoes8': {
+      id: 'shoes8',
+      name: 'Classic Oxford Shoes',
+      price: 119.99,
+      img: '/assets/image 28.jpg',
+      hasSizes: true,
+      sizes: ['6', '7', '8', '9', '10']
+    },
+    'shoes9': {
+      id: 'shoes9',
+      name: 'Summer Espadrilles',
+      price: 59.99,
+      img: '/assets/image 29.jpg',
+      hasSizes: true,
+      sizes: ['6', '7', '8', '9']
+    },
+    'shoes10': {
+      id: 'shoes10',
+      name: 'Outdoor Hiking Boots',
+      price: 129.99,
+      img: '/assets/image 30.jpg',
+      hasSizes: true,
+      sizes: ['6', '7', '8', '9', '10', '11']
+    },
+    'shoes11': {
+      id: 'shoes11',
+      name: 'J-11',
+      price: 129.99,
+      img: '/assets/k 8.jfif',
+      hasSizes: true,
+      sizes: ['6', '7', '8', '9', '10', '11']
+    },
+    'shoes12': {
+      id: 'shoes12',
+      name: 'Summer Espadrilles',
+      price: 129.99,
+      img: '/assets/k 10.jfif',
+      hasSizes: true,
+      sizes: ['6', '7', '8', '9', '10', '11']
+    },
+  };
+
+  function openModal(productId) {
+    currentProduct = products[productId];
+    document.getElementById('modalImage').src = currentProduct.img;
+    document.getElementById('modalTitle').textContent = currentProduct.name;
+    document.getElementById('modalPrice').textContent = `$${currentProduct.price.toFixed(2)}`;
+    const sizeOptions = document.getElementById('sizeOptions');
+    sizeOptions.innerHTML = currentProduct.hasSizes
+      ? '<p><strong>Select Size:</strong></p>' + currentProduct.sizes.map(size =>
+          `<input type="radio" id="size-${size}" name="size" value="${size}">
+           <label for="size-${size}">${size}</label>`
+        ).join('')
+      : '<p>One size fits all</p>';
+    document.getElementById('productModal').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('productModal').style.display = 'none';
+  }
+
+  function addToCart() {
+    let size = 'One Size';
+    if (currentProduct.hasSizes) {
+      const selectedSize = document.querySelector('input[name="size"]:checked');
+      if (!selectedSize) {
+        alert('Please select a size!');
+        return;
+      }
+      size = selectedSize.value;
+    }
+    cart.push({ ...currentProduct, selectedSize: size, quantity: 1 });
+    updateCart();
+    closeModal();
+    alert(`${currentProduct.name} (Size: ${size}) added to cart!`);
+  }
+
+function updateCart() {
+  const cartItems = document.getElementById('cartItems');
+  const cartCount = document.getElementById('cartCount');
+  const cartTotal = document.getElementById('cartTotal');
+  cartItems.innerHTML = '';
+
+  // Calculate bonus items
+  const bonusCount = Math.floor(cart.length / 5);
+
+  // Total for pricing (exclude bonuses)
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+  // Display real cart items
+  cart.forEach((item, index) => {
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      <img src="${item.img}" alt="${item.name}">
+      <div class="cart-item-details">
+        <h4>${item.name}</h4>
+        <p>Size: ${item.selectedSize}</p>
+        <p class="cart-item-price">$${item.price.toFixed(2)}</p>
+      </div>
+      <span class="remove-item" onclick="removeFromCart(${index})">✕</span>
+    `;
+    cartItems.appendChild(div);
+  });
+
+  // Add visual bonus items
+  for (let i = 0; i < bonusCount; i++) {
+    const bonusDiv = document.createElement('div');
+    bonusDiv.className = 'cart-item';
+    bonusDiv.innerHTML = `
+      <img src="/assets/gift wrapping.jpg" alt="Bonus Item">
+      <div class="cart-item-details">
+        <h4>🎁 Free Bonus Item</h4>
+        <p>Surprise Gift</p>
+        <p class="cart-item-price">$0.00</p>
+      </div>
+    `;
+    cartItems.appendChild(bonusDiv);
+  }
+
+  // Update cart icon and total
+  cartCount.textContent = cart.length + bonusCount;
+  cartTotal.textContent = `$${total.toFixed(2)}`;
+}
+
+
+ function removeFromCart(index) {
+  cart.splice(index, 1);
+  updateCart();
+}
+
+  
+
+  function openCartModal() {
+    document.getElementById('shippingForm').style.display = 'none';
+    document.getElementById('cartModal').style.display = 'flex';
+  }
+
+  function closeCartModal() {
+    document.getElementById('cartModal').style.display = 'none';
+  }
+
+  function showShippingForm() {
+    if (cart.length === 0) {
+      alert('Your cart is empty!');
+      return;
+    }
+    document.getElementById('shippingForm').style.display = 'block';
+  }
+
+  function submitOrder() {
+    const fullName = document.getElementById('fullName').value;
+    const address = document.getElementById('address').value;
+    const city = document.getElementById('city').value;
+    const zipCode = document.getElementById('zipCode').value;
+    const country = document.getElementById('country').value;
+    if (!fullName || !address || !city || !zipCode || !country) {
+      alert('Please fill all shipping details!');
+      return;
+    }
+    alert(`Order placed successfully!\nTotal: $${cart.reduce((sum, item) => sum + item.price, 0).toFixed(2)}`);
+    cart = [];
+    updateCart();
+    closeCartModal();
+  }
+
+  window.onclick = function (e) {
+    if (e.target === document.getElementById('productModal')) closeModal();
+    if (e.target === document.getElementById('cartModal')) closeCartModal();
+  };
+
+
+
+ 
+</script>
+
+</body>
+</html>
