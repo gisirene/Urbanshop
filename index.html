@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Urban Shop</title>
+  <style>
+      html{
+      scroll-behavior: smooth;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+.header {
+  background-color: rgb(221, 190, 143);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: 10vh;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
+
+.logo img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.logo h1 {
+  color: white;
+  font-size: 24px;
+  margin: 20px;
+  display: flex;
+
+  height: 40px; 
+}
+
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 5px;
+  position: relative;
+}
+
+nav ul li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+
+.hero {
+  height: calc(150vh - 80px);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6)),
+              url('/assets/shop.jpg') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero-content h2 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.buttons .btn {
+  padding: 12px 25px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.primary {
+  background-color:navajowhite;
+  color: black;
+}
+
+
+.primary:hover, .secondary:hover {
+  opacity: 0.9;
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}
+
+    
+    
+
+   
+
+    
+    .services-section {
+            padding: 150px 20px;
+            text-align: center;
+            background-color: #f8f5f2;  
+        }
+        .services-section h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .service-cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px 0;
+        }
+        .service-card {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            width: 250px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .service-card img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+        }
+        .service-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .service-card p {
+            font-size: 1.1em;
+            color: #333;
+        }
+
+  
+    
+    .about-wrapper {
+      max-width: 900px;
+      margin: 80px auto;
+      padding: 20px 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      max-height: 1000px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #c7a17a;
+      margin-bottom: 30px;
+    }
+
+    p {
+      font-size: 1.1em;
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 20px;
+    }
+
+    ul li::before {
+      content: "✓ ";
+      color: #c7a17a;
+      font-weight: bold;
+    }
+    #contact {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #f8f5f2;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #contact h1 {
+      margin: 0;
+      padding: 40px 0 20px;
+      background-color: #f8f5f2;
+      width: 100%;
+      text-align: center;
+    }
+
+    .contact-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .contact-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+      padding: 40px;
+      border: 3px solid #d1c7b7;
+      margin-bottom: 40px;
+      height: calc(100% - 40px);
+    }
+
+    .contact-info {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .contact-form {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .contact-info h2, .contact-form h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .contact-info p {
+      margin: 8px 0;
+      line-height: 1.6;
+      color: #666;
+    }
+
+    .info-block {
+      margin-bottom: 25px;
+      padding-bottom: 25px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .info-block strong {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #333;
+      font-size: 18px;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+
+    .error {
+      color: #e74c3c;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    form textarea {
+      height: 120px;
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    form button {
+      background-color: #d1c7b7;
+      color: #333;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 100%;
+    }
+
+    form button:hover {
+      background-color: #c0b6a6;
+    }
+
+ @media (max-width: 1200px) {
+      
+      .hero-content h2 {
+        font-size: 42px;
+      }
+      
+      .service-card {
+        width: 220px;
+      }
+    }
+
+    @media (max-width: 992px) {
+      
+      .hero {
+        height: calc(100vh - 80px);
+      }
+      
+      .about-columns {
+        gap: 20px;
+      }
+      
+      .about-card {
+        padding: 20px;
+      }
+    }
+
+@media (max-width: 768px) {
+      
+      .header {
+        position: sticky;
+        height: auto;
+        padding: 10px 15px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        margin-bottom: 0;
+        flex-shrink: 0;
+      }
+
+      .logo img {
+        height: 30px;
+      }
+
+      .logo h1 {
+        font-size: 20px;
+        margin: 0 10px;
+      }
+
+      
+      nav {
+        position: relative;
+      }
+
+      nav ul {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: rgb(221, 190, 143);
+        flex-direction: column;
+        gap: 0;
+        width: 200px;
+        border-radius: 0 0 0 10px;
+        box-shadow: -2px 2px 5px rgba(0,0,0,0.2);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      nav ul.show {
+        max-height: 500px;
+        padding: 10px 0;
+      }
+
+      nav ul li {
+        width: 100%;
+      }
+
+      nav ul li a {
+        display: block;
+        padding: 12px 20px;
+        text-align: left;
+      }
+
+      
+      .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        padding: 5px 10px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      
+      .header {
+        padding: 8px 10px;
+      }
+
+      .logo h1 {
+        font-size: 18px;
+      }
+
+      nav ul {
+        width: 180px;
+      }
+    }
+
+    @media (max-width: 400px) {
+     
+      .logo h1 {
+        display: none; 
+      }
+
+      .logo img {
+        margin-right: 0;
+      }
+
+      nav ul {
+        width: 160px;
+      }
+    }
+
+    .menu-toggle {
+      display: none;
+    }
+
+    .footer {
+      background-color: rgb(59, 59, 59);
+      color: #f1f1f1;
+      padding: 50px 20px;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-column {
+      flex: 1 1 200px;
+    }
+
+    .footer-column h3 {
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    .footer-column a {
+      color: #ccc;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .footer-column a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #444;
+      color: #888;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .search-box {
+        margin: 10px 0 0 0;
+        width: 100%;
+      }
+      .products-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .cart-item img {
+        margin-bottom: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .footer-column a,
+.footer-column p,
+.footer-bottom {
+  color: #ffffff !important;
+}
+  </style>
+</head>
+<body>
+
+   <header class="header">
+        <div class="logo">
+            <img src="/assets/logo.png" alt="logo">
+            <h1>URBAN SHOP</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="Products.html">Products</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#contact">Contact us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Welcome to Urban Shop</h2>
+            <p>Every outfit tells a story—and we’re here to help you write yours in style</p>
+            <div class="buttons">
+                <a href="products.html" class="btn primary">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section" id="services">
+    <h1>Our Services</h1>
+    <p>We offer a variety of services to make your shopping experience smooth, fast, and enjoyable!</p>
+
+    <div class="service-cards">
+        
+        <div class="service-card">
+            <img src="/assets/Fast Delivery.jpeg">
+            <h3>Fast Shipping</h3>
+            <p>Get your products delivered to your doorstep in record time with our fast and reliable shipping services.</p>
+        </div>
+
+      
+        <div class="service-card">
+            <img src="/assets/Call Vector Hd.jpeg">
+            <h3>24/7 Customer Support</h3>
+            <p>Our friendly customer support team is available around the clock to help with any issues you may face.</p>
+        </div>
+
+      
+        <div class="service-card">
+            <img src="/assets/free return.jpg" alt="Free Returns">
+            <h3>Free Returns</h3>
+            <p>If you're not satisfied with your purchase, return it easily for free within 30 days.</p>
+        </div>
+
+    
+        <div class="service-card">
+            <img src="/assets/gift wrapping.jpg" alt="Gift Wrapping">
+            <h3>Gift Wrapping</h3>
+            <p> We also offer gift wrapping in festive seasons.Make your gift even more special with our elegant gift wrapping service, available at checkout.</p>
+        
+    </div>
+    </div>
+</section>
+
+
+<section >
+  <div class="about-wrapper" id="about">
+    <h1>About Urban Shop</h1>
+    <div style="display: flex; flex-direction: column; gap: 30px;">
+
+      
+      <div class="about-card">
+        <h2>Who We Are</h2>
+        <p>Urban Shop is your style destination. We specialize in selling quality clothes, shoes, necklaces, and other lifestyle essentials to help you express yourself through fashion.</p>
+      </div>
+      <div class="about-card">
+        <h2>Our Mission</h2>
+        <p>Our mission is to provide fashionable, high-quality products that blend comfort and affordability. We make it easy to look good and feel great every day.</p>
+      </div>
+      <div class="about-card">
+        <h2>Our Vision</h2>
+        <p>We aim to be the most trusted fashion destination in Kigali and beyond—where everyone finds their fit, style, and a little joy in every visit.</p>
+      </div>
+      <div class="about-card">
+        <h2>Our Values</h2>
+        <ul>
+          <li>✓ Style you can trust</li>
+          <li>✓ Respect for our customers</li>
+          <li>✓ Honest and fair service</li>
+          <li>✓ Passion for trends and comfort</li>
+          <li>✓ Always adding surprise touches</li>
+        </ul>
+      </div>
+
+    
+    </div>
+  </div>
+</section>
+
+
+
+
+  <section id="contact">
+    <h1>Contact Us</h1>
+    <div class="contact-container">
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <h2>Get In Touch</h2>
+          <p>Have questions about our products, your order, or anything else? We're here to help! Fill out the form and we'll get back to you as soon as possible.</p>
+          
+          <div class="info-block">
+            <strong>Our Location</strong>
+            <p>123 Urban Street, Fashion District, NY 10001, USA</p>
+          </div>
+
+          <div class="info-block">
+            <strong>Email Us</strong>
+            <p>info@urbanedge.com<br/>support@urbanedge.com</p>
+          </div>
+
+          <div class="info-block">
+            <strong>Call Us</strong>
+            <p>+1 (123) 456-7890<br/>+1 (123) 456-7891</p>
+          </div>
+
+          <div class="info-block">
+            <strong>Working Hours</strong>
+            <p>Monday - Friday: 9am - 6pm<br/>
+               Saturday: 10am - 4pm<br/>
+               Sunday: Closed</p>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <h2>Send Us a Message</h2>
+          <form>
+            <label>Your Name</label>
+            <input type="text" placeholder="John Doe"/>
+            <div class="error">Name must be at least 2 characters</div>
+
+            <label>Email Address</label>
+            <input type="email" placeholder="john@example.com"/>
+            <div class="error">Please enter a valid email address</div>
+
+            <label>Subject</label>
+            <input type="text" placeholder="How can we help you?"/>
+            <div class="error">Subject must be at least 5 characters</div>
+
+            <label>Message</label>
+            <textarea placeholder="Tell us about your inquiry..."></textarea>
+
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</body>
+</html>
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-column">
+      <h3>Follow Us</h3>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/urbanshop" style="color: #ffffff;">Facebook</a>
+        <a href="https://www.twitter.com/urbanshop" style="color: #ffffff;">Twitter</a>
+        <a href="https://www.instagram.com" style="color: #ffffff;">Instagram</a>
+        <a href="https://www.linkedin.com" style="color: #ffffff;">LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="footer-column">
+      <h3>Quick Links</h3>
+      <a href="index.html" style="color: #ffffff;">Home</a>
+      <a href="index.html#service" style="color: #ffffff;">Services</a>
+      <a href="index.html#about" style="color: #ffffff;">About Us</a>
+      <a href="products.html" style="color: #ffffff;">Products</a>
+      <a href="index.html#contact" style="color: #ffffff;">Contact Us</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>Contact Us</h3>
+      <p style="font-size: 14px; color: #ffffff;">
+        Makuza Plaza, 10 KN 4 Ave, Kigali<br>
+        📞 (250) 795-817-004<br>
+        📧 urbanshop30@gmail.com
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-bottom" style="color: #ffffff;">
+    &copy; 2025 Urban Shop. All rights reserved.
+  </div>
+</footer>
+
+</body>
+</html>
